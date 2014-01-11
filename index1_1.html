@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<meta charset="UTF-8"/>
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+       <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+  
+  
+  <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+</head>
+<h1> <FONT COLOR="#0000FF">歡迎來到Joe的留言板</FONT> </h1>
+ <body>
+    {% for greeting in greetings %}
+      {% if greeting.author %}
+        <font class="username"><b>{{ greeting.author.nickname() }}</b></font> wrote:
+      {% else %}
+        An anonymous person wrote:
+      {% endif %}
+      <blockquote>{{ greeting.content|escape }}</blockquote>
+    {% endfor %}
+
+    <form action="/sign" method="post">
+      <input type="hidden" value="{{guestbook_name}}" name="guestbook_name">
+      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+      <div><input type="submit" value="訪客留言"></div>
+    </form>
+    <form>訪客名稱: <input value="{{guestbook_name}}" name="guestbook_name">
+    <input type="submit" value="switch"></form>
+
+    <a href="{{ url}}">{{ url_linktext }}</a>
+
+  </body>
+</html>
